@@ -1,0 +1,16 @@
+name: 'Test flatpak build'
+on:
+  push:
+    branches: [test-build]
+jobs:
+  flatpak:
+    runs-on: ubuntu-latest
+    container:
+      image: bilelmoussaoui/flatpak-github-actions:freedesktop-22.08
+      options: --privileged
+    steps:
+    - uses: actions/checkout@v2
+    - uses: flatpak/flatpak-github-actions/flatpak-builder@v4
+      with:
+        bundle: de.mediathekview.MediathekView.flatpak
+        manifest-path: de.mediathekview.MediathekView.yaml
